@@ -1,16 +1,34 @@
-import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm'
+import {BaseEntity, Column, Entity, PrimaryGeneratedColumn} from 'typeorm'
+
+enum Grupos {
+    A = 'A',
+    B = 'B',
+    C = 'C',
+    D = 'D',
+    E = 'E',
+    F = 'F',
+    G = 'G',
+    H = 'H'
+};
 
 @Entity()
-export class Equipo{
+export class Equipo extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({
+        unique: true
+    })
     nombre: string;
 
-    @Column()
-    grupo: string;
+    @Column({
+        type: 'enum',
+        enum: Grupos
+    })
+    grupo: Grupos;
 
-    @Column()
+    @Column({
+        default: 0
+    })
     puntajeGrupo: number;
 }

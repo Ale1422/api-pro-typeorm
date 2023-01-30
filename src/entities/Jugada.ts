@@ -1,7 +1,8 @@
-import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm'
+import {BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne} from 'typeorm'
+import { User } from './User'
 
 @Entity()
-export class Jugada{
+export class Jugada extends BaseEntity{
     @PrimaryGeneratedColumn()
     id:number;
 
@@ -11,15 +12,26 @@ export class Jugada{
     @Column()
     userId:number;
 
-    @Column()
+    @Column({
+        default: 0
+    })
     resultadoLocal:number;
 
-    @Column()
+    @Column({
+        default: 0
+    })
     resultadoVisitante:number;
 
-    @Column()
+    @Column({
+        default: 0
+    })
     puntaje:number;
 
-    @Column()
+    @Column({
+        default: false
+    })
     check:boolean;
+
+    @ManyToOne(() => User, (user) => user.jugadas)
+    user: User
 }

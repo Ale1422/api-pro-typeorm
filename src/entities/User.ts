@@ -1,35 +1,53 @@
-import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, BaseEntity, OneToMany } from 'typeorm';
+import { Jugada } from './Jugada'
 
 @Entity()
-export class User {
+export class User extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: Number;
 
-    @Column()
+    @Column({
+        nullable: false
+    })
     name: String;
 
-    @Column()
+    @Column({
+        nullable: false
+    })
     lastName: String;
 
-    @Column()
+    @Column({
+        nullable: false
+    })
     passwordHash: String;
 
-    @Column()
+    @Column({
+        nullable: false,
+        unique: true
+    })
     email: String;
 
     @Column()
     img: String;
 
-    @Column()
+    @Column({
+        default: 0
+    })
     saldo: Number;
 
-    @Column()
+    @Column({
+        default: 0
+    })
     puntaje: Number;
 
-    @Column()
+    @Column({
+        default: false
+    })
     isAdmin: Boolean;
 
-    @Column()
+    @Column({
+        default: true
+    })
     isActive: Boolean;
     
     @CreateDateColumn()
@@ -37,4 +55,7 @@ export class User {
 
     @UpdateDateColumn()
     upadatedAt: Date;
+
+    @OneToMany(() => Jugada, (jugada) => jugada.userId)
+    jugadas: Jugada[];
 }

@@ -1,7 +1,21 @@
-import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
+import {BaseEntity, Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
+
+enum Resultado {
+    LOCAL = 'LOCAL',
+    VISITANTE = 'VISITANTE',
+    EMPATE = 'EMPATE'
+};
+
+enum Fase {
+    GRUPO = 'GRUPO',
+    OCTAVOS = 'OCTAVOS',
+    CUARTOS = 'CUARTOS',
+    SEMI = 'SEMI',
+    FINAL = 'FINAL'
+}
 
 @Entity()
-export class Partido {
+export class Partido extends BaseEntity{
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -14,18 +28,30 @@ export class Partido {
     @Column()
     fecha:Date;
 
-    @Column()
+    @Column({
+        default: 0
+    })
     resultadoLocal:number;
 
-    @Column()
+    @Column({
+        default: 0
+    })
     resultadoVisitante:number;
 
-    @Column()
-    resultado:string;
+    @Column({
+        type: 'enum',
+        enum: Resultado
+    })
+    resultado: Resultado;
 
-    @Column()
-    fase:string;
+    @Column({
+        type: 'enum',
+        enum: Fase
+    })
+    fase: Fase;
 
-    @Column()
+    @Column({
+        default: false
+    })
     checkFlag:boolean;
 }
