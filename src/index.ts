@@ -1,11 +1,17 @@
 import "reflect-metadata"
 
-import express from "express";
-import morgan from 'morgan';
-import cors from 'cors';
+import app from './app'
+import {AppDataSource} from './db'
 
-const app = express();
+async function main (){
+    try {
+        await AppDataSource.initialize();
+        console.log('Data base connected')
+        app.listen(3001);
+        console.log('Server is listening on port 3001')        
+    } catch (error) {
+        console.log(error)
+    }
+}
 
-
-app.listen(3000);
-console.log('Server is listening on port 3000')
+main();
