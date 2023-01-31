@@ -1,4 +1,5 @@
-import {BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne} from 'typeorm'
+import {BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne, ManyToMany, JoinTable} from 'typeorm'
+import { Partido } from './Partido';
 import { User } from './User'
 
 @Entity()
@@ -33,5 +34,9 @@ export class Jugada extends BaseEntity{
     check:boolean;
 
     @ManyToOne(() => User, (user) => user.jugadas)
-    user: User
+    user: User;
+
+    @ManyToMany(() => Partido)
+    @JoinTable()
+    partidos: Partido[];
 }

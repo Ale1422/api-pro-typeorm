@@ -6,28 +6,23 @@ export class User extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: Number;
 
-    @Column({
-        nullable: false
-    })
+    @Column()
     name: String;
 
-    @Column({
-        nullable: false
-    })
+    @Column()
     lastName: String;
 
-    @Column({
-        nullable: false
-    })
+    @Column()
     passwordHash: String;
 
     @Column({
-        nullable: false,
         unique: true
     })
     email: String;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     img: String;
 
     @Column({

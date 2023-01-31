@@ -1,4 +1,6 @@
-import {BaseEntity, Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
+import {BaseEntity, Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToMany} from 'typeorm';
+import { Equipo } from './Equipo';
+import { Jugada } from './Jugada';
 
 enum Resultado {
     LOCAL = 'LOCAL',
@@ -18,12 +20,6 @@ enum Fase {
 export class Partido extends BaseEntity{
     @PrimaryGeneratedColumn()
     id: number;
-
-    @Column()
-    localId:number
-
-    @Column()
-    visitanteId:number;
 
     @Column()
     fecha:Date;
@@ -54,4 +50,15 @@ export class Partido extends BaseEntity{
         default: false
     })
     checkFlag:boolean;
+
+    @OneToOne(() => Equipo)
+    @JoinColumn()
+    local: Equipo
+
+    @OneToOne(() => Equipo)
+    @JoinColumn()
+    visitante: Equipo
+
+    @ManyToMany(() => Jugada, (jugada) => jugada.partidos)
+    jugadas: Jugada[]
 }
