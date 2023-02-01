@@ -38,7 +38,6 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
         let passOk : boolean = user ? await bcrypt.compare(password, user?.passwordHash) : false;
         
         if(!passOk) throw new Error("Usuario o contraseña invalida");
-
         const InfoToken = {
             id: user?.id,
             name: user?.name,
@@ -53,4 +52,33 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
     }
 }
 
-//https://dev.to/juliecherner/authentication-with-jwt-tokens-in-typescript-with-express-3gb1
+export const getUser = async (req: Request, res: Response ) => {
+    try {
+        const {id} = req.params;
+        const user = await User.find({
+            where:{id:parseInt(id)},
+            select : {
+                name: true,
+                email: true
+            }});
+
+        res.send(user);
+    } catch (error) {
+        if(error instanceof Error){
+            res.status(500).json({message: error.message});
+        }
+    }
+}
+
+export const setUserAdmin =async (req:Request, res: Response) => {
+    try {
+        
+    } catch (error) {
+        
+    }
+}
+
+/*
+    https://dev.to/juliecherner/authentication-with-jwt-tokens-in-typescript-with-express-3gb1
+    https://www.youtube.com/watch?v=DpoKXjuWKwE&list=PLdOotbFwzDIiU4Hs8ySZr-phOeGMBY_3D&index=1
+*/
