@@ -2,9 +2,9 @@ import { User } from '../entities/User';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { NextFunction, Request, Response } from 'express';
-const { SECRET } = process.env;
+import { SECRET_KEY } from '../midlewares/auth';
 
-export const createUser = async (req:Request, res:Response, next:NextFunction) =>{
+export const registerUser = async (req:Request, res:Response, next:NextFunction) =>{
     try {
         const { name, lastName, email, password } = req.body;
         
@@ -29,3 +29,28 @@ export const createUser = async (req:Request, res:Response, next:NextFunction) =
         }
     }
 }
+
+export const loginUser = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const {email, password} = req.body;
+        const user = await User.findOneBy({email});
+
+        let passOk : boolean = user ? await bcrypt.compare(password, user?.passwordHash) : false;
+        
+        if(!passOk) throw new Error("Usuario o contraseña invalida");
+
+        const InfoToken = {
+            id: user?.id,
+            name: user?.name,
+            email: user?.email
+        };
+        const token = jwt.sign(InfoToken, SECRET_KEY);
+        res.send(token);
+    } catch (error) {
+        if(error instanceof Error){
+            res.status(500).json({message: error.message});
+        }
+    }
+}
+
+//https://dev.to/juliecherner/authentication-with-jwt-tokens-in-typescript-with-express-3gb1

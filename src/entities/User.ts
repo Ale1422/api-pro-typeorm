@@ -4,46 +4,46 @@ import { Jugada } from './Jugada'
 @Entity()
 export class User extends BaseEntity {
     @PrimaryGeneratedColumn()
-    id: Number;
+    id: number;
 
     @Column()
-    name: String;
+    name: string;
 
     @Column()
-    lastName: String;
+    lastName: string;
 
     @Column()
-    passwordHash: String;
+    passwordHash: string;
 
     @Column({
         unique: true
     })
-    email: String;
+    email: string;
 
     @Column({
         nullable: true
     })
-    img: String;
+    img: string;
 
     @Column({
         default: 0
     })
-    saldo: Number;
+    saldo: number;
 
     @Column({
         default: 0
     })
-    puntaje: Number;
+    puntaje: number;
 
     @Column({
         default: false
     })
-    isAdmin: Boolean;
+    isAdmin: boolean;
 
     @Column({
         default: true
     })
-    isActive: Boolean;
+    isActive: boolean;
     
     @CreateDateColumn()
     createdAt: Date;
