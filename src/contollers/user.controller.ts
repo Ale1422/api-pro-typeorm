@@ -2,9 +2,9 @@ import { User } from '../entities/User';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { NextFunction, Request, Response } from 'express';
-import { SECRET_KEY } from '../midlewares/auth';
+import { CustomRequest, SECRET_KEY } from '../midlewares/auth';
 
-export const registerUser = async (req:Request, res:Response, next:NextFunction) =>{
+export const registerUser = async (req:Request, res:Response, next: NextFunction) =>{
     try {
         const { name, lastName, email, password } = req.body;
         
@@ -70,11 +70,14 @@ export const getUser = async (req: Request, res: Response ) => {
     }
 }
 
-export const setUserAdmin =async (req:Request, res: Response) => {
+export const setUserAdmin = async (req: CustomRequest , res: Response) => {
     try {
-        
+        console.log(req.token)
+        res.send(req.token)
     } catch (error) {
-        
+        if(error instanceof Error){
+            res.status(500).json({message: error.message});
+        }
     }
 }
 
