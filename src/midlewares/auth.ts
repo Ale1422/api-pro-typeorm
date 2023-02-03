@@ -5,24 +5,42 @@ dotenv.config();
 
 export const SECRET_KEY: Secret = process.env.SECRET ? process.env.SECRET : 'default';
 
-export interface CustomRequest extends Request {
-  token: string | JwtPayload;
+interface IPayload{
+  id: number
 }
 
 export const auth = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const token = req.header("Authorization")?.replace("Bearer ", "");
+    const token = req.header("auth-token");
 
     if (!token) {
         throw new Error("Please authenticate");
     }
-    const decoded = jwt.verify(token, SECRET_KEY);
-    (req as CustomRequest).token = decoded;
+    const payload = jwt.verify(token, SECRET_KEY) as IPayload;
+    req.idUser = payload.id;
 
     next();
   } catch (error) {
     if(error instanceof Error){
-        res.status(500).json({error});
+        res.status(500).json({message: error.message});
     }
   }
 };
+
+// export const auth = async (req: Request, res: Response, next: NextFunction) => {
+//   try {
+//     const token = req.header("Authorization")?.replace("Bearer ", "");
+
+//     if (!token) {
+//         throw new Error("Please authenticate");
+//     }
+//     const decoded = jwt.verify(token, SECRET_KEY);
+//     req.token = decoded;
+
+//     next();
+//   } catch (error) {
+//     if(error instanceof Error){
+//         res.status(500).json({message: error.message});
+//     }
+//   }
+// };

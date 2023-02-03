@@ -1,8 +1,8 @@
 import { User } from '../entities/User';
-import jwt from 'jsonwebtoken';
+import jwt,{JwtPayload} from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { NextFunction, Request, Response } from 'express';
-import { CustomRequest, SECRET_KEY } from '../midlewares/auth';
+import { SECRET_KEY } from '../midlewares/auth';
 
 export const registerUser = async (req:Request, res:Response, next: NextFunction) =>{
     try {
@@ -38,13 +38,11 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
         let passOk : boolean = user ? await bcrypt.compare(password, user?.passwordHash) : false;
         
         if(!passOk) throw new Error("Usuario o contraseña invalida");
-        const InfoToken = {
-            id: user?.id,
-            name: user?.name,
-            email: user?.email
+        const userToken = {
+            id: user?.id
         };
-        const token = jwt.sign(InfoToken, SECRET_KEY);
-        res.send(token);
+        const token = jwt.sign(userToken, SECRET_KEY);
+        res.header('auth-token',token).json(user?.name);
     } catch (error) {
         if(error instanceof Error){
             res.status(500).json({message: error.message});
@@ -70,11 +68,19 @@ export const getUser = async (req: Request, res: Response ) => {
     }
 }
 
-export const setUserAdmin = async (req: CustomRequest , res: Response) => {
+export const setUserAdmin = async (req: Request , res: Response) => {
     try {
-        console.log(req.token)
-        res.send(req.token)
-    } catch (error) {
+        const user = await User.find({
+            where:{id:req.idUser},
+            select:{
+                name:true,
+                lastName:true,
+                email:true,
+                isAdmin: true
+            }
+        });
+        res.send(user)
+    } catch (error) {        
         if(error instanceof Error){
             res.status(500).json({message: error.message});
         }
