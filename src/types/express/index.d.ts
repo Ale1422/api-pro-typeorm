@@ -7,5 +7,6 @@ declare global {
     namespace Express { export interface Request{
         token ? : string | JwtPayload;
         idUser ? : number;
+        userIsAdmin ? : boolean;
     }}
 }

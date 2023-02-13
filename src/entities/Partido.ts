@@ -35,6 +35,7 @@ export class Partido extends BaseEntity{
     resultadoVisitante:number;
 
     @Column({
+        default: 'EMPATE',
         type: 'enum',
         enum: Resultado
     })

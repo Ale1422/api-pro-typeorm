@@ -2,7 +2,7 @@ import { User } from '../entities/User';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
-import { SECRET_KEY } from '../middlewares/auth.middleware';
+import { IPayload, SECRET_KEY } from '../middlewares/auth.middleware';
 import { LoginSchemaType, RegisterSchemaType } from '../schemas/user.schema';
 import resError from '../utils/resError';
 
@@ -40,13 +40,15 @@ export const loginUser = async (
     const { email, password } = req.body;
     const user = await User.findOneBy({ email });
 
-    let passOk: boolean = user
-      ? await bcrypt.compare(password, user?.passwordHash)
-      : false;
+    if(!user) throw new Error("No existe el usuario");
 
-    if (!passOk) throw new Error("Usuario o contraseña invalida");
-    const userToken = {
+    let passOk: boolean = await bcrypt.compare(password, user?.passwordHash);
+
+    if (!passOk) throw new Error("Contraseña invalida");
+    
+    const userToken: IPayload = {
       id: user?.id,
+      isAdmin: user?.isAdmin
     };
     const token = jwt.sign(userToken, SECRET_KEY);
     res.header("auth-token", token).json(user?.name);

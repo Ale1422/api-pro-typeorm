@@ -1,10 +1,13 @@
 import {Router} from 'express'
-import { createTeam } from '../controllers/equipo.controller';
+import { createTeam, getAll } from '../controllers/equipo.controller';
+import { auth } from '../middlewares/auth.middleware';
 import { schemaValidation } from '../middlewares/schemaValidator.middleware';
 import { EquipoSchema } from '../schemas/equipo.schema';
 
 const router = Router();
 
-router.post('/create', schemaValidation(EquipoSchema),createTeam);
+router.get('', getAll);
+router.use(auth)
+router.post('', schemaValidation(EquipoSchema),createTeam);
 
 export default router;

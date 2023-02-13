@@ -5,8 +5,9 @@ dotenv.config();
 
 export const SECRET_KEY: Secret = process.env.SECRET ? process.env.SECRET : 'default';
 
-interface IPayload{
-  id: number
+export interface IPayload{
+  id: number;
+  isAdmin: boolean;
 }
 
 export const auth = async (req: Request, res: Response, next: NextFunction) => {
@@ -18,6 +19,7 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
     }
     const payload = jwt.verify(token, SECRET_KEY) as IPayload;
     req.idUser = payload.id;
+    req.userIsAdmin = payload.isAdmin
 
     next();
   } catch (error) {
