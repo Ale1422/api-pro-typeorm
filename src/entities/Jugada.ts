@@ -1,4 +1,4 @@
-import {BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne, ManyToMany, JoinTable} from 'typeorm'
+import {BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne, ManyToMany, JoinTable, CreateDateColumn, UpdateDateColumn} from 'typeorm'
 import { Partido } from './Partido';
 import { User } from './User'
 
@@ -33,10 +33,15 @@ export class Jugada extends BaseEntity{
     })
     check:boolean;
 
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @UpdateDateColumn()
+    upadatedAt: Date;
+
     @ManyToOne(() => User, (user) => user.jugadas)
     user: User;
 
-    @ManyToMany(() => Partido)
-    @JoinTable()
-    partidos: Partido[];
+    @ManyToOne(() => Partido, (partido) => partido.jugadas)
+    partido: Partido
 }

@@ -1,0 +1,402 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2023-02-18T22:46:45.774Z",
+  "__export_source": "insomnia.desktop.app:v2022.7.5",
+  "resources": [
+    {
+      "_id": "req_531b2cce17fb4c9fa97f350c077d6d0c",
+      "parentId": "fld_acbaa032cca942d09aec7e814613a77c",
+      "modified": 1676759965061,
+      "created": 1676759683929,
+      "url": "http://localhost:3001/team",
+      "name": "Crear equipo",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"nombre\": \"Brasil\",\n\t\"grupo\": \"A\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_d65ed758184c4879b91fc623fed2a6a2"
+        },
+        {
+          "id": "pair_161e771294934e7b87f6c67b77281318",
+          "name": "auth-token",
+          "value": "{{ _.tokenProde }}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676759683929,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_acbaa032cca942d09aec7e814613a77c",
+      "parentId": "wrk_3570bbe5b6c745daa105c5a4621a09db",
+      "modified": 1676748398965,
+      "created": 1676748398965,
+      "name": "Prode",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1676748398965,
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_3570bbe5b6c745daa105c5a4621a09db",
+      "parentId": null,
+      "modified": 1675780841703,
+      "created": 1675780841703,
+      "name": "New Document",
+      "description": "",
+      "scope": "design",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_e042a0db19be4bb9992b4774b956b4e4",
+      "parentId": "fld_acbaa032cca942d09aec7e814613a77c",
+      "modified": 1676758670036,
+      "created": 1676758569704,
+      "url": "http://localhost:3001/user/register",
+      "name": "Register",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"name\": \"Alejandro\",\n    \"email\": \"alejandro.c.14.22@gmail.com\",\n    \"password\": \"154461\",\n    \"confirmPassword\": \"154461\",\n    \"lastName\": \"Carrizo\"\n}"
+      },
+      "parameters": [],
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "authentication": {},
+      "metaSortKey": -1676758569704,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_971d1ff3fed84b0dbfb5d3bf888193d5",
+      "parentId": "fld_acbaa032cca942d09aec7e814613a77c",
+      "modified": 1676759617074,
+      "created": 1676759553502,
+      "url": "http://localhost:3001/user/admin",
+      "name": "Admin user",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_ffb10d53144c47269c4f092e6e9d4f21",
+          "name": "auth-token",
+          "value": "{{ _.tokenProde }}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676754944202,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_f711f2ccca4c40e295373c8b68ca45e2",
+      "parentId": "fld_acbaa032cca942d09aec7e814613a77c",
+      "modified": 1676751366288,
+      "created": 1676751318700,
+      "url": "http://localhost:3001/move/check",
+      "name": "Checkear jugadas",
+      "description": "",
+      "method": "POST",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_4656190dc12a4062a4b668bea16fe82e",
+          "name": "auth-token",
+          "value": "{{ _.tokenProde }}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676751318700,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_5b19ebd0af2b444289d780f481e22e3f",
+      "parentId": "fld_acbaa032cca942d09aec7e814613a77c",
+      "modified": 1676751259968,
+      "created": 1676751204309,
+      "url": "http://localhost:3001/move",
+      "name": "Ontener jugada usuario",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_7a40154de5c14d6a98064609bf08849c",
+          "name": "auth-token",
+          "value": "{{ _.tokenProde }}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676751204309,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_17dc0ec29fc2435fb4f6cc9257bf0057",
+      "parentId": "fld_acbaa032cca942d09aec7e814613a77c",
+      "modified": 1676760170450,
+      "created": 1676748589909,
+      "url": "http://localhost:3001/move",
+      "name": "Crear jugada",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"partidoId\": 1,\n\t\"resultadoLocal\": 4,\n\t\"resultadoVisitante\": 2\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_10bdff2aa45d427a93b0b38ebda61941",
+          "name": "auth-token",
+          "value": "{{ _.tokenProde }}",
+          "description": ""
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_8b8862ad93fe4109b211e651df99e8ed"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676748589909,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_306841bb408749f79167a5b28424ab38",
+      "parentId": "fld_acbaa032cca942d09aec7e814613a77c",
+      "modified": 1676748441881,
+      "created": 1676337442807,
+      "url": "http://localhost:3001/user/login",
+      "name": "Login",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"email\":\"alejandro.c.14.22@gmail.com\",\n\t\"password\":\"154461\"\n}"
+      },
+      "parameters": [],
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "authentication": {},
+      "metaSortKey": -1676337442807,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_2bb3e095a8544e9eab53b0658b6d08b4",
+      "parentId": "fld_acbaa032cca942d09aec7e814613a77c",
+      "modified": 1676760099063,
+      "created": 1676341380578,
+      "url": "http://localhost:3001/game",
+      "name": "Crear partido",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"local\": 1,\n\t\"visitante\": 2,\n\t\"fecha\": \"2023-02-20 12:00\",\n\t\"fase\": \"GRUPO\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_484b51a6e36d470082285ef7f40725a9"
+        },
+        {
+          "id": "pair_2d3f66707a6b41c0946848e544c6b5fe",
+          "name": "auth-token",
+          "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjc2MzQwNzEwfQ.ADyS5q2w062eqJ8v-ob0ihDw52Sh2YA4HiFyCG7FfqA",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676337442757,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_ca586ca8bab4476da875144830e2805b",
+      "parentId": "fld_acbaa032cca942d09aec7e814613a77c",
+      "modified": 1676748489025,
+      "created": 1676340794562,
+      "url": "http://localhost:3001/game",
+      "name": "Obtener todos los partidos",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1676337442707,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_b1558b95921a4eb086f5b1eba349b241",
+      "parentId": "fld_acbaa032cca942d09aec7e814613a77c",
+      "modified": 1676748508320,
+      "created": 1676340358540,
+      "url": "http://localhost:3001/game",
+      "name": "Actualizar partido",
+      "description": "",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"id\": 1,\n\t\"resultadoLocal\": 3,\n\t\"resultadoVisitante\": 2,\n\t\"resultado\": \"LOCAL\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_80235350800e4a1ca720b695855396e6",
+          "name": "auth-token",
+          "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjc2MzQwNzEwfQ.ADyS5q2w062eqJ8v-ob0ihDw52Sh2YA4HiFyCG7FfqA",
+          "description": ""
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_3653adcc043846149824f407f855d508"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676337442657,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_49de851a712a8286d7dd7570f1dbc63b0959f1be",
+      "parentId": "wrk_3570bbe5b6c745daa105c5a4621a09db",
+      "modified": 1676748716989,
+      "created": 1675780841708,
+      "name": "Base Environment",
+      "data": {},
+      "dataPropertyOrder": {},
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1675780841708,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_49de851a712a8286d7dd7570f1dbc63b0959f1be",
+      "parentId": "wrk_3570bbe5b6c745daa105c5a4621a09db",
+      "modified": 1675780841710,
+      "created": 1675780841710,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_13a40ecb504a4d97a70fc085a7fd3a46",
+      "parentId": "wrk_3570bbe5b6c745daa105c5a4621a09db",
+      "modified": 1676760356875,
+      "created": 1675780841704,
+      "fileName": "Pruebas Apis",
+      "contents": "",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    },
+    {
+      "_id": "uts_6e684e6a481d487aad8b400d81d50a9d",
+      "parentId": "wrk_3570bbe5b6c745daa105c5a4621a09db",
+      "modified": 1675780841715,
+      "created": 1675780841715,
+      "name": "Example Test Suite",
+      "_type": "unit_test_suite"
+    },
+    {
+      "_id": "env_10ffa5b443bd483e915fbf0b42c34c47",
+      "parentId": "env_49de851a712a8286d7dd7570f1dbc63b0959f1be",
+      "modified": 1676759952432,
+      "created": 1676748700277,
+      "name": "Token",
+      "data": {
+        "tokenProde": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjc2NzU5OTI2fQ.UREMJW9qtUXYd8cef2eLa_l8MjW-6nRufMaB4zT6ABc"
+      },
+      "dataPropertyOrder": { "&": ["tokenProde"] },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1676748700277,
+      "_type": "environment"
+    }
+  ]
+}

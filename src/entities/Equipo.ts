@@ -1,4 +1,4 @@
-import {BaseEntity, Column, Entity, PrimaryGeneratedColumn} from 'typeorm'
+import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm'
 
 enum Grupos {
     A = 'A',
@@ -31,4 +31,10 @@ export class Equipo extends BaseEntity {
         default: 0
     })
     puntajeGrupo: number;
+
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @UpdateDateColumn()
+    upadatedAt: Date;
 }

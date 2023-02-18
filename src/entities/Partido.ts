@@ -1,4 +1,4 @@
-import {BaseEntity, Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToMany} from 'typeorm';
+import {BaseEntity, Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToMany, CreateDateColumn, UpdateDateColumn, OneToMany} from 'typeorm';
 import { Equipo } from './Equipo';
 import { Jugada } from './Jugada';
 
@@ -51,6 +51,12 @@ export class Partido extends BaseEntity{
         default: false
     })
     checkFlag:boolean;
+    
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @UpdateDateColumn()
+    upadatedAt: Date;
 
     @OneToOne(() => Equipo)
     @JoinColumn()
@@ -60,6 +66,6 @@ export class Partido extends BaseEntity{
     @JoinColumn()
     visitante: Equipo
 
-    @ManyToMany(() => Jugada, (jugada) => jugada.partidos)
-    jugadas: Jugada[]
+    @OneToMany(() => Jugada, (jugada) => jugada.partidoId)
+    jugadas: Jugada[];
 }

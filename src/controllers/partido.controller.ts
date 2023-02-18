@@ -8,7 +8,21 @@ export const nuevoPartido = async (req: Request, res: Response) => {
 
         const {local, visitante, fecha, fase} = req.body;
 
-        const partidoDb = await Partido.findOneBy({local,visitante,fase});
+        const partidoDb = await Partido.findOne({
+          relations: {
+            visitante: true,
+            local: true,
+          },
+          where: {
+            local: {
+              id: local,
+            },
+            visitante: {
+              id: visitante,
+            },
+            fase,
+          },
+        });
 
         if(partidoDb) throw new Error("Ya existe el partido");
 
@@ -28,7 +42,18 @@ export const nuevoPartido = async (req: Request, res: Response) => {
 export const actualizarPartido = async (req:Request, res:Response) => {
     try {
         if(!req.userIsAdmin) throw new Error("No autorizado");
+
+        const {id, resultadoLocal, resultadoVisitante, resultado} = req.body;
         
+        const partido = await Partido.update({id},{
+            resultadoLocal,
+            resultadoVisitante,
+            resultado, 
+            checkFlag: true
+        });
+
+        if(!partido.affected) throw new Error("No se actualizo ningun partido");
+        res.json({message:"Actualizado"})          
     } catch (error) {
         resError(error, res);
     }

@@ -75,15 +75,7 @@ export const getUser = async (req: Request, res: Response ) => {
 
 export const setUserAdmin = async (req: Request , res: Response) => {
     try {
-        const user = await User.find({
-            where:{id:req.idUser},
-            select:{
-                name:true,
-                lastName:true,
-                email:true,
-                isAdmin: true
-            }
-        });
+        const user = await User.update({id:req.idUser},{isAdmin: true});
         res.send(user)
     } catch (error) {        
       resError(error, res);
