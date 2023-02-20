@@ -75,7 +75,10 @@ export const getUser = async (req: Request, res: Response ) => {
 
 export const setUserAdmin = async (req: Request , res: Response) => {
     try {
-        const user = await User.update({id:req.idUser},{isAdmin: true});
+        const user = await User.update({id:req.idUser},{
+          isAdmin: true,
+          upadatedAt: new Date()
+        });
         res.send(user)
     } catch (error) {        
       resError(error, res);

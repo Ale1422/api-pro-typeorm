@@ -57,38 +57,66 @@ export const checkearJugadas = async (req: Request, res: Response) => {
   try {
     if(!req.userIsAdmin) throw new Error("No autorizado");
     
-    // const jugadas = await Jugada.find({
-    //   relations:{
-    //     partido: true
-    //   },
-    //   where: {
-    //     check: false,
-    //     partido:{
-    //       checkFlag: false
-    //     }
-    //   }
-    // })
-
-    const partidos = await Partido.find({
+    const jugadas = await Jugada.find({
+      select:{
+        user:{
+          puntaje: true
+        }
+      },
       relations:{
-        jugadas: true
+        partido: true,
+        user:true
+      },
+      where: {
+        check: false,
+        partido:{
+          checkFlag: false
+        }
       }
     })
 
-    console.log(partidos)
+    if(!jugadas.length) throw new Error("No hay jugadas por chequear");
 
-    //console.log(jugadas)
-
-    //res.json({partidos, jugadas})
-
-    // if(!jugadas) throw new Error("No hay jugadas por chequear");
     
-    // for ( const item of jugadas){
-    //   let puntaje: number;
+    //res.json(jugadas)
+    
+    for ( const item of jugadas){
+      let punt: number;
+      switch(item.partido.resultado){
+        case "LOCAL":
+            if(item.resultadoLocal === item.partido.resultadoLocal && item.resultadoVisitante === item.partido.resultadoVisitante) punt = 5;    
+            else if(item.resultadoLocal > item.resultadoVisitante) punt = 3;
+            else punt = 0
+            break;
+        case "VISITANTE":
+            if(item.resultadoLocal === item.partido.resultadoLocal && item.resultadoVisitante === item.partido.resultadoVisitante) punt = 5;    
+            else if(item.resultadoLocal < item.resultadoVisitante) punt = 3;
+            else punt = 0
+            break;
+        case "EMPATE":
+            if(item.resultadoLocal === item.partido.resultadoLocal && item.resultadoVisitante === item.partido.resultadoVisitante) punt = 5;    
+            else if(item.resultadoLocal === item.resultadoVisitante) punt = 3;
+            else punt = 0
+            break;
+        default:
+            punt = 0
+            break;
+      }
       
-    // }
+      await User.update({ id: item.userId }, {
+        puntaje: item.user.puntaje + punt,
+        upadatedAt: new Date()
+      })
+
+      await Jugada.update({id:item.id},{
+        check: true,
+        upadatedAt: new Date()
+      })
+
+      res.status(200).send()
+    }
 
   } catch (error) {
-    console.log(error)
+    resError(error,res);
   }
 };

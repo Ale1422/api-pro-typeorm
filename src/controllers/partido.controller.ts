@@ -49,7 +49,8 @@ export const actualizarPartido = async (req:Request, res:Response) => {
             resultadoLocal,
             resultadoVisitante,
             resultado, 
-            checkFlag: true
+            checkFlag: true,
+            upadatedAt: new Date()
         });
 
         if(!partido.affected) throw new Error("No se actualizo ningun partido");

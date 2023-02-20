@@ -66,6 +66,6 @@ export class Partido extends BaseEntity{
     @JoinColumn()
     visitante: Equipo
 
-    @OneToMany(() => Jugada, (jugada) => jugada.partidoId)
+    @OneToMany(() => Jugada, (jugada) => jugada.partido)
     jugadas: Jugada[];
 }
